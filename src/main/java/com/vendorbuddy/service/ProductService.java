@@ -112,11 +112,11 @@ public class ProductService {
         product.setUpdatedAt(LocalDateTime.now());
         return productRepository.save(product);
     }
-    
+
     public Product updateProduct(String id, Product productDetails) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
-        
+
         if (productDetails.getName() != null) {
             product.setName(productDetails.getName());
         }
@@ -141,28 +141,28 @@ public class ProductService {
         if (productDetails.getDescription() != null) {
             product.setDescription(productDetails.getDescription());
         }
-        
+
         product.setUpdatedAt(LocalDateTime.now());
-        
+
         return productRepository.save(product);
     }
-    
+
     public void deleteProduct(String id) {
         if (!productRepository.existsById(id)) {
             throw new RuntimeException("Product not found");
         }
         productRepository.deleteById(id);
     }
-    
+
     public Product getProductById(String id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
     }
-    
+
     public List<Product> getProductsBySupplier(String supplierId) {
         return productRepository.findBySupplierId(supplierId);
     }
-    
+
     public void updateStock(String productId, Integer quantity) {
         Product product = getProductById(productId);
         int newStock = product.getStock() - quantity;

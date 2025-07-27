@@ -22,22 +22,22 @@ public class Product {
 
     @NotBlank(message = "Category is required")
     private String category;
-    
+
     @NotNull(message = "Unit price is required")
     @Positive(message = "Unit price must be positive")
     private Double unitPrice;
-    
+
     @NotBlank(message = "Unit type is required")
     private String unitType; // kg, litre, piece, etc.
-    
+
     @NotNull(message = "Stock quantity is required")
     @Positive(message = "Stock must be positive")
     private Integer stock;
-    
+
     @NotNull(message = "Delivery range is required")
     @Positive(message = "Delivery range must be positive")
     private Integer deliveryRange; // in kilometers
-    
+
     private String imageUrl;
     private String description;
     private Double supplierLat;
@@ -48,7 +48,7 @@ public class Product {
     private Integer reviewCount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    
+
     @Transient
     private Double distanceKm;
 
@@ -114,10 +114,10 @@ public class Product {
 
     public Double getRating() { return rating; }
     public void setRating(Double rating) { this.rating = rating; }
-    
+
     public Integer getReviewCount() { return reviewCount; }
     public void setReviewCount(Integer reviewCount) { this.reviewCount = reviewCount; }
-    
+
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     
