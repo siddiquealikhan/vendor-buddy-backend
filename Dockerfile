@@ -1,19 +1,20 @@
+# Stage 1: Build
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
+
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+
+RUN mvn clean package -DskipTests
+
+# Stage 2: Runtime
 FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-# Copy Maven files
-COPY pom.xml .
-COPY src ./src
+# Copy the jar from the builder stage
+COPY --from=builder /app/target/vendor-buddy-0.0.1-SNAPSHOT.jar .
 
-# Install Maven
-RUN apt-get update && apt-get install -y maven
-
-# Build the application
-RUN mvn clean package -DskipTests
-
-# Expose port
 EXPOSE 8080
 
-# Run the application
-CMD ["java", "-jar", "target/vendor-buddy-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "vendor-buddy-0.0.1-SNAPSHOT.jar"]
